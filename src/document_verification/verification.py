@@ -15,6 +15,18 @@ def verify(request: VerificationRequest) -> VerificationResult:
         check = rule["check"]
         field = request.fields.get(field_name)
 
+
+        
+        if field is not None and field.confidence is not None and  field.confidence < 0.8:
+            results.append(RuleResult(
+                rule_name= rule["name"] , 
+                status= "needs_review" , 
+                message= f"condfidence level is low needs human review"
+            ))
+            continue
+
+
+
         if check == "required":
             if field is None or not field.value or not field.value.strip():
                 results.append(
@@ -37,6 +49,7 @@ def verify(request: VerificationRequest) -> VerificationResult:
             pattern = rule["pattern"]
 
             if field is None or not field.value:
+                print("1")
                 results.append(
                     RuleResult(
                         rule_name=rule["name"],
@@ -52,6 +65,7 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         message=f"{field_name} has a valid format.",
                     )
                 )
+                print("2")
             else:
                 results.append(
                     RuleResult(
@@ -60,11 +74,20 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         message=f"{field_name} has an invalid format.",
                     )
                 )
-        else: 
-            raise ValueError("wrong check format")
+        else:
+            results.append(
+                RuleResult(
+                    rule_name=rule["name"],
+                    status="needs_review",
+                    message=f"Unsupported rule type: {check}",
+                )
+            )
+            print("3")
 
     if any(result.status == "failed" for result in results) or results == [] or len(results) != len(request.rules): #===============>> verify if the sent file is valid or does it just jump 
         overall_status = "failed"
+    elif any(result.status == "needs_review" for result in results):
+        overall_status = "needs_review"
     else:
         overall_status = "passed"
 
