@@ -1,0 +1,17 @@
+
+document_types: id_card
+rules:
+  - name: full_name_required
+    field: full_name
+    check: required
+
+  - name: national_id_required
+    field: national_id
+    check: required
+
+  - name: date_of_birth_required
+    field: date_of_birth
+    check: required
+  - name: experimental_check
+    field: full_name
+    check: unknown_check
