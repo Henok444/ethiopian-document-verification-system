@@ -6,38 +6,7 @@ from src.document_verification.create_verification_request import create_verific
 
 from pathlib import Path
 
-"""class VerificationRequest:
-    document_type: str
-    fields: dict[str, ExtractedField]
-    rules: list[dict[str, Any]]"""
 
-"""
-
-def test_valid_document():
-    request = VerificationRequest(
-        document_type="identity_card",
-        fields={
-            "full_name_object": ExtractedField("full_name", "ሀና ተስፋዬ"),
-            "id_number_object": ExtractedField("id_number", "AB123456"),
-        },
-        rules=[
-            {
-                "name": "name_required",
-                "field": "full_name_object",
-                "check": "required",
-            },
-            {
-                "name": "id_format",
-                "field": "id_number_object",
-                "check": "pattern",
-                "pattern": r"[A-Z]{2}\d{6}",
-            },
-        ],
-    )
-
-    result = verify(request)
-
-"""
 
 BASE = Path(__file__).resolve().parents[2]
 
@@ -55,16 +24,17 @@ def process_document(img_path: str)->dict:
           "fields": fields
      }
 
-docs = process_document(image_path)
-request = create_verification_request(docs , config_path)
-print(request)
-
-result = verify(request)
+def verify_request(path , request ):
 
 
+    docs = process_document(path)
+    created_request = create_verification_request(docs , request)
 
 
-print(result)
+    result = verify(created_request)
+    return result 
+
+
 
 
 

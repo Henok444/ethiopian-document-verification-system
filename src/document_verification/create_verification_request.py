@@ -30,10 +30,10 @@ def create_rule_for_verification_request(config_path: Path):
      rules = config["rules"]
      return rules
      
-def create_verification_request(processed: dict , confi_path: Path)->VerificationRequest:
+def create_verification_request(processed: dict , jason)->VerificationRequest:
 
      fields_dict = create_field_for_verification_request(processed)
-     rules = create_rule_for_verification_request(confi_path)
+     rules = jason["rules"]
 
      request = VerificationRequest(document_type= "id card" , 
                                    fields= 
