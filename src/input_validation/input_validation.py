@@ -1,30 +1,26 @@
-
-from typing import Literal
-from pydantic import BaseModel, Field
 import json
 
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import   HTTPException
 from pydantic import ValidationError
 
-
-class VerificationRuleInput(BaseModel):
-    name: str = Field(min_length=1)
-    field: str = Field(min_length=1)
-    check: Literal["required", "pattern"]
+from input_validation.input_contract import Request
 
 
-class VerificationRequestInput(BaseModel):
-    document_type: str = Field(min_length=1)
-    rules: list[VerificationRuleInput] = Field(min_length=1)
 
-def validate_request(request , file):
-    if not file.filename:
-        raise HTTPException(status_code=400, detail="A file is required.")
+
+def validate_request(data , image_file):
+    if not image_file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="The second file must be an image.")
+
+
+
+
+
     try:
-        request_data = json.loads(request)
-        validated_request = VerificationRequestInput.model_validate(
-            request_data
+        
+        validated_request = Request.model_validate(
+            data
         )
     except json.JSONDecodeError:
         raise HTTPException(
