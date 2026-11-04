@@ -1,17 +1,13 @@
 {
   "document_type": "identity_card",
   "extract": {
-    "default": ["name", "id"],
-    "custom_keyword": ["region"],
-    "key_and_pattern": {
-      "passport number": "[A-Z]{2}\\d{6}"
-    }
+    "default": ["name", "id" , "birth_date" , "expiry_date"]
   },
   "rules": [
     { "name": "name_required", "field": "name", "check": "exist" },
-    { "name": "passport_format", "field": "passport number", "check": "pattern", "pattern": "[A-Z]{2}\\d{6}" },
-    { "name": "region_match", "field": "region", "check": "exact_match", "exact_match": "Addis Ababa" },
-    { "name": "id_greater", "field": "id", "check": "comparison", "compare": "find_greater" }
+    { "name": "birth_date required", "field": "birth_date", "check": "exist"},
+    { "name": "expiry_date", "field": "expiry_date", "check": "exist"},
+    { "name": "id is required", "field": "id", "check": "exist"}
   ],
   "output": {
     "name": "default",
