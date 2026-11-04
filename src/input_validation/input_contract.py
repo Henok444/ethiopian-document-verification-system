@@ -26,7 +26,7 @@ class Base(BaseModel):
 
 
 class Extract(Base):
-    default: list[Literal["name" , "id"]]
+    default: list[Literal["name" , "id" , "birth_date" , "expiry_date"]]
     custom_keyword: list[str] = []
     key_and_pattern: dict[str, str] = {}
 
