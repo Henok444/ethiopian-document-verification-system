@@ -1,4 +1,4 @@
-from src.document_verification.field_extracter import build_extractedfield_object
+from document_verification_engine.verification_system_tools.field_extracter import build_extractedfield_object
 
 
 text = """Test Test Test
