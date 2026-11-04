@@ -27,7 +27,7 @@ def verify(request: VerificationRequest) -> VerificationResult:
 
 
 
-        if check == "required":
+        if check == "exist":
             if field is None or not field.value or not field.value.strip():
                 results.append(
                     RuleResult(
