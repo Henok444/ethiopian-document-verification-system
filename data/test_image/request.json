@@ -1,7 +1,7 @@
 {
   "document_type": "identity_card",
   "extract": {
-    "default": ["name", "ids"],
+    "default": ["name", "id"],
     "custom_keyword": ["region"],
     "key_and_pattern": {
       "passport number": "[A-Z]{2}\\d{6}"
