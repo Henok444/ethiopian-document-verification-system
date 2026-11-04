@@ -1,8 +1,8 @@
-from src.document_verification.schemas import (
+from document_verification_engine.verification_system_tools.schemas import (
     ExtractedField,
     VerificationRequest,
 )
-from src.document_verification.verification import verify
+from document_verification_engine.verification_system_tools.verification import verify
 
 
 def test_valid_document():
