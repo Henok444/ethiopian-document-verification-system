@@ -5,10 +5,11 @@ from pathlib import Path
 
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from pydantic import ValidationError
 
 from src.input_validation.input_validation import validate_request
-from src.document_verification.pipeline import verify_request
+from src.prepare_data_for_engine.prepare import load_request  
+from src.document_verification_engine.pipeline import verify_request
+from src.output_to_send.output import output 
 
 
 from typing import Literal
@@ -24,34 +25,52 @@ app = FastAPI(
 
 @app.post("/verify")
 
+
+
+
+
+ 
+# 
 async def verify_document(
-    file: UploadFile = File(...) ,
-    request : str = Form(...)
+    json_file: UploadFile = File(...),
+    image_file: UploadFile = File(...)
 ):
+
+
+
+    data = await load_request(json_file)
     
 
+    # validation 
+
+    validate_request(data  , image_file )
+
+  # Prepare the request data 
+
     
-
-    validate_request(request , file)
-
-    request_data = json.loads(request)
 
     try:
         with tempfile.TemporaryDirectory() as temp_dir:
             image_path = Path(temp_dir) / "uploaded_image"
 
-            image_path.write_bytes(await file.read())
+            image_path.write_bytes(await image_file.read())
+
+            # engine processing
 
 
+            result = verify_request(str(image_path) , dict(data))
 
 
-            result = verify_request(str(image_path) , dict(request_data))
 
     finally:
-        await file.close()
+        await image_file.close()
+
+    # output formatting
+
+    output_result = output(result)
         
 
-    return result
+    return output_result
 
     
     
