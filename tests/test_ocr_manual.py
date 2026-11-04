@@ -1,4 +1,4 @@
-from src.document_verification.ocr import read_document
+from document_verification_engine.image_extracter_model.ocr_model.ocr_model.ocr import read_document
 from pathlib import Path
 
 
