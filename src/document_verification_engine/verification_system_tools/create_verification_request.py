@@ -1,8 +1,8 @@
-from src.document_verification.schemas import VerificationRequest
+from document_verification_engine.verification_system_tools.schemas import VerificationRequest
 
 from pathlib import Path
 import yaml
-
+"""
 
 def create_field_for_verification_request(processed: dict)->dict:
 
@@ -29,13 +29,14 @@ def create_rule_for_verification_request(config_path: Path):
      config = load_config(config_path)
      rules = config["rules"]
      return rules
+"""
      
-def create_verification_request(processed: dict , jason)->VerificationRequest:
+def create_verification_request(request)->VerificationRequest:
+     document_type = request["document_type"]
+     fields_dict = request["fields"]
+     rules = request["rules"]
 
-     fields_dict = create_field_for_verification_request(processed)
-     rules = jason["rules"]
-
-     request = VerificationRequest(document_type= "id card" , 
+     request = VerificationRequest(document_type= document_type, 
                                    fields= 
                                         fields_dict
                                     , 
