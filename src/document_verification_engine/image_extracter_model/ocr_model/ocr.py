@@ -8,4 +8,3 @@ def read_document(image_path: str) -> str :
     text = pytesseract.image_to_string(image , lang= "amh+eng")
 
     return text.strip()
-
