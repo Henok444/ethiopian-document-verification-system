@@ -1,26 +1,78 @@
 import re
 
-from src.document_verification_engine.verification_system_tools.extracter_tools import extract_birth_date , extract_exiry_dates , extract_national_id  
+from document_verification_engine.verification_system_tools.extracter_tools import  extract_default
 from document_verification_engine.verification_system_tools.schemas import ExtractedField
 
-def extract_fields(text : str)->dict:
-    return{
-        "date_of_birth" : extract_birth_date(text), 
-        "date_of_expiry" : extract_exiry_dates(text),
-        "id" : extract_national_id(text)
-    }
-def build_extractedfield_object(text)-> dict:
 
 
-    extracted = extract_fields(text)
-    list = []
+
+def get_field(request):
+
+
+     default_keys = []
+     
+
+     for key , value in request.items():
+
+          if key == "extract":
+               for k , v in value.items():
+                    if k == "default":
+
+                         default_keys = [item for item in v]
+                    """
+                    if k == "custom_keys":
+                         custom_keys = v 
+                    """
+     return default_keys  
+
+
+def extract(text , request):
+     default_keys = get_field(request)
+
+     fields = {}
+
+     if default_keys:
+          for key in default_keys:
+               fields[key] = extract_default(key , text= text)
+     return fields 
+
+
+"""
+if custom_keys:
+    for key , pattern in custom_keys.items():
+        fields[key] = extract_key_pattern(key , pattern , text= text) 
+"""
+
+
+            
+
+
+
+
+
+def build_extractedfield_object(text , request)-> dict:
+
+
+    extracted = extract(text , request )
+    fields = {}
     for k , v in extracted.items():
-            list.append(ExtractedField(name= k , value= str(v) , confidence=None))
+            fields[k] = ExtractedField(name= k , value= str(v) , confidence=None)
     #print(list)
-    return list   
+    return fields  
+
+def extract_fields(text , request)->dict:
+     
+
+
+
+     
+
+
+
+     fields = build_extractedfield_object(text , request)
+     return  fields 
 
         
-
 
 
 
