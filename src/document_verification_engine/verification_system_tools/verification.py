@@ -1,6 +1,6 @@
 import re
 
-from src.document_verification.schemas import (
+from document_verification_engine.verification_system_tools.schemas import (
     VerificationRequest,
     VerificationResult,
     RuleResult,
@@ -49,7 +49,6 @@ def verify(request: VerificationRequest) -> VerificationResult:
             pattern = rule["pattern"]
 
             if field is None or not field.value:
-                print("1")
                 results.append(
                     RuleResult(
                         rule_name=rule["name"],
