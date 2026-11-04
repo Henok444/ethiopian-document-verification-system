@@ -1,4 +1,4 @@
-from src.document_verification.pipeline import process_document
+from src.document_verification_engine.pipeline import process_document
 
 from pathlib import Path
 
