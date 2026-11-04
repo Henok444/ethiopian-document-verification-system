@@ -31,9 +31,12 @@ def create_rule_for_verification_request(config_path: Path):
      return rules
 """
      
-def create_verification_request(request)->VerificationRequest:
+def create_verification_request(request , fields )->VerificationRequest:
+
+
+
      document_type = request["document_type"]
-     fields_dict = request["fields"]
+     fields_dict = fields
      rules = request["rules"]
 
      request = VerificationRequest(document_type= document_type, 
