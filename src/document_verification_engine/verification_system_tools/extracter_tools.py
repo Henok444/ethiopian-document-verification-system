@@ -1,8 +1,6 @@
 import re
 
 
-from src.document_verification.schemas import ExtractedField
-
 def clean(text)->str:
 
     cleaned = re.sub(r"\s+" , "" , text).lower()
@@ -110,41 +108,4 @@ def extract_national_id(text : str):
                     else: field = None 
     #print(field)
     return field
-def extract_fields(text : str)->dict:
-    return{
-        "date_of_birth" : extract_birth_date(text), 
-        "date_of_expiry" : extract_exiry_dates(text),
-        "id" : extract_national_id(text)
-    }
-
-def build_extractedfield_object(text)-> dict:
-
-
-    extracted = extract_fields(text)
-    list = []
-    for k , v in extracted.items():
-            list.append(ExtractedField(name= k , value= str(v) , confidence=None))
-    #print(list)
-    return list   
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
