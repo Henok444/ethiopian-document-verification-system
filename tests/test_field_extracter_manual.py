@@ -1,7 +1,20 @@
-from document_verification_engine.verification_system_tools.field_extracter import extract_fields
-import json 
+import json
 
-text = """Test Test Test
+
+from document_verification_engine.verification_system_tools.field_extracter import extract_fields
+from document_verification_engine.image_extracter_model.ocr_model.ocr import read_document
+from pathlib import Path
+
+
+base = Path(__file__).resolve().parents[1]
+
+path = base/ "data" / "test_image" / "id_2.png"
+
+text_img = read_document(path)
+
+
+text = """ name 
+chaltu mulatu
 
 የትወልድ ቀነ / Date of Birth
 06/መስከ/1984
@@ -46,4 +59,24 @@ request = {
 }
 
 
-print(extract_fields(text , request=request))
+request_2 = {
+  "document_type": "identity_card",
+  "extract": {
+    "default": ["name", "id" , "birth_date" , "expiry_date"]
+  },
+  "rules": [
+    { "name": "name_required", "field": "name", "check": "exist" },
+    { "name": "birth_date required", "field": "birth_date", "check": "exist"},
+    { "name": "expiry_date", "field": "expiry_date", "check": "exist"},
+    { "name": "id is required", "field": "id", "check": "exist"}
+  ],
+  "output": {
+    "name": "default",
+    "region": "all"
+  }
+}
+
+
+print(text_img)
+
+print(extract_fields(text_img , request=request_2))
