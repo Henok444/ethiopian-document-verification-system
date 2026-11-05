@@ -15,7 +15,7 @@ def extract_birth_date(text: str) -> dict:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
     labels = {
-        "ethiopian_date_of_birth": ["የትወልድቀነ" ],
+        "ethiopian_date_of_birth": ["የትወልድቀነ" , "dateofbirth"],
 
     }
 
@@ -50,7 +50,7 @@ def extract_expiry_dates(text: str) -> dict:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
     labels = {
-        "ethiopian_date_of_expiry": ["የሚማየበቀበትቀነ" ],
+        "ethiopian_date_of_expiry": ["የሚማየበቀበትቀነ" , "Dateofissue" ],
     }
 
     date_pattern = re.compile(
@@ -86,7 +86,7 @@ def extract_name(text: str) -> str | None:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
     labels = {
-        "full_name": ["ሙሉስም", "fullname"],
+        "full_name": ["ሙሉስም", "fullname" , "name"  ],
     }
 
     # 2 to 4 words, Amharic or English letters only (no digits or symbols)
