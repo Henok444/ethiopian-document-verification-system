@@ -4,7 +4,7 @@ from pathlib import Path
 
 base = Path(__file__).resolve().parents[1]
 
-path = base/ "data" / "test_image" / "id.jpg"
+path = base/ "data" / "test_image" / "h.png"
 
 text = read_document(path)
 
