@@ -56,7 +56,7 @@ def build_extractedfield_object(text , request)-> dict:
     extracted = extract(text , request )
     fields = {}
     for k , v in extracted.items():
-            fields[k] = ExtractedField(name= k , value= str(v) , confidence=None)
+            fields[k] = ExtractedField(name= k , value= v , confidence=None)
     #print(list)
     return fields  
 
