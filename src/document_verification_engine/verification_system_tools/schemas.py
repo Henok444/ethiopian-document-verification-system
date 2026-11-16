@@ -21,6 +21,7 @@ class RuleResult:
     rule_name: str
     status: str
     message: str
+    found: str | None = None 
 
 
 @dataclass

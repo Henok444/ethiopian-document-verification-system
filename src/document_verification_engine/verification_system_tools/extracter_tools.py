@@ -1,4 +1,5 @@
 import re
+from document_verification_engine.verification_system_tools.additional_tools.expirey_date import extract_expiry_dates
 
 
 def clean(text)->str:
@@ -15,12 +16,12 @@ def extract_birth_date(text: str) -> dict:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
     labels = {
-        "ethiopian_date_of_birth": ["የትወልድቀነ" , "dateofbirth"],
+        "ethiopian_date_of_birth": ["የትወልድቀነ" , "dateofbirth" , "Date of Birth"],
 
     }
 
     date_pattern = re.compile(
-         r"\d{1,2}/[\u1200-\u137F]+/\d{4}"
+         r"\d{1,2}\s+[A-Za-z]{3}\s+\d{2,4}"
     )
     fields = {}
     for field_name, possible_labels in labels.items():
@@ -43,6 +44,7 @@ def extract_birth_date(text: str) -> dict:
                 break
 
     return fields["ethiopian_date_of_birth"]
+"""
 def extract_expiry_dates(text: str) -> dict:
 
 
@@ -50,7 +52,7 @@ def extract_expiry_dates(text: str) -> dict:
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
     labels = {
-        "ethiopian_date_of_expiry": ["የሚማየበቀበትቀነ" , "Dateofissue" ],
+        "ethiopian_date_of_expiry": ["የሚማየበቀበትቀነ" , "Dateofissue" , "DateofExpiry" ],
     }
 
     date_pattern = re.compile(
@@ -77,9 +79,15 @@ def extract_expiry_dates(text: str) -> dict:
                 break
 
     return fields["ethiopian_date_of_expiry"]    
+"""
+def extract_expiry(text : str )-> dict:
 
 
-import re
+    result = extract_expiry_dates(text)
+    # {'ethiopian': '12/ጥር/2024', 'gregorian': '19/SEP/2031'}
+    return result['gregorian']
+
+
 
 def extract_name(text: str) -> str | None:
 
@@ -184,8 +192,9 @@ def extract_default(key , text ):
         value = extract_id(text)
     if key == "birth_date":
         value = extract_birth_date(text)
-    if key == "id_expiry_date":
-        value == extract_expiry_dates(text)
+    if key == "expiry_date":
+        value = extract_expiry(text)
+
 
 
 

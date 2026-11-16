@@ -15,6 +15,9 @@ def verify(request: VerificationRequest) -> VerificationResult:
         check = rule["check"]
         field = request.fields.get(field_name)
 
+        found = field.value
+
+
 
         
         if field is not None and field.confidence is not None and  field.confidence < 0.8:
@@ -34,6 +37,7 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         rule_name=rule["name"],
                         status="failed",
                         message=f"{field_name} is required.",
+                        found= None
                     )
                 )
             else:
@@ -42,6 +46,7 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         rule_name=rule["name"],
                         status="passed",
                         message=f"{field_name} is present.",
+                        found= f"{found}" 
                     )
                 )
 
@@ -54,7 +59,9 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         rule_name=rule["name"],
                         status="failed",
                         message=f"{field_name} is missing.",
+                        found= None
                     )
+
                 )
             elif re.fullmatch(pattern, field.value):
                 results.append(
@@ -62,15 +69,16 @@ def verify(request: VerificationRequest) -> VerificationResult:
                         rule_name=rule["name"],
                         status="passed",
                         message=f"{field_name} has a valid format.",
+                        found=None
                     )
                 )
-                print("2")
             else:
                 results.append(
                     RuleResult(
                         rule_name=rule["name"],
                         status="failed",
                         message=f"{field_name} has an invalid format.",
+                        found=None
                     )
                 )
         else:
@@ -79,9 +87,9 @@ def verify(request: VerificationRequest) -> VerificationResult:
                     rule_name=rule["name"],
                     status="needs_review",
                     message=f"Unsupported rule type: {check}",
+                    found= None
                 )
             )
-            print("3")
 
     if any(result.status == "failed" for result in results) or results == [] or len(results) != len(request.rules): #===============>> verify if the sent file is valid or does it just jump 
         overall_status = "failed"

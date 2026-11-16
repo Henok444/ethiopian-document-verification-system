@@ -57,18 +57,10 @@ def build_extractedfield_object(text , request)-> dict:
     fields = {}
     for k , v in extracted.items():
             fields[k] = ExtractedField(name= k , value= v , confidence=None)
-    #print(list)
+    #print(fields)
     return fields  
 
 def extract_fields(text , request)->dict:
-     
-
-
-
-     
-
-
-
      fields = build_extractedfield_object(text , request)
      return  fields 
 
