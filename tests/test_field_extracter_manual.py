@@ -8,7 +8,7 @@ from pathlib import Path
 
 base = Path(__file__).resolve().parents[1]
 
-path = base/ "data" / "test_image" / "id_2.png"
+path = base/ "data" / "test_image" / "id.jpg"
 
 text_img = read_document(path)
 
@@ -48,7 +48,7 @@ request = {
   },
   "rules": [
     { "name": "name_required", "field": "name", "check": "exist" },
-    { "name": "passport_format", "field": "passport number", "check": "pattern", "pattern": "[A-Z]{2}\\d{6}" },
+    { "name": "expiry_date_required", "field": "expiry_date", "check": "exist"},
     { "name": "region_match", "field": "region", "check": "exact_match", "exact_match": "Addis Ababa" },
     { "name": "id_greater", "field": "id", "check": "comparison", "compare": "find_greater" }
   ],
