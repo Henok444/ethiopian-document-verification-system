@@ -205,12 +205,14 @@ if json_file is not None:
 # 8. Display verification results
 # --------------------------------------------------
 
-def display_document_result(result):
+def display_document_result(result, image=None):
 
     status = result.get("status", "unknown")
 
     if status == "passed":
+        found_value = result["rule_results"][0]["found"]
         st.success(f"Status: {status.upper()}")
+        st.success(f"Found the value: {found_value}")
 
     elif status == "failed":
         st.error(f"Status: {status.upper()}")
@@ -244,6 +246,8 @@ def display_document_result(result):
 
     with st.expander("View complete response"):
         st.json(result)
+        if image is not None:
+            st.image(image, caption="Verified document", use_container_width=True)
 
 
 # --------------------------------------------------
@@ -294,7 +298,7 @@ if mode == "Single Document":
 
                     st.success("Verification completed.")
 
-                    display_document_result(response.json())
+                    display_document_result(response.json(), image_file.getvalue())
 
                 else:
 
@@ -393,8 +397,14 @@ else:
 
                             elif "result" in item:
 
+                                matched_image = next(
+                                    (img for img in image_files if img.name == filename),
+                                    image_files[index] if index < len(image_files) else None,
+                                )
+
                                 display_document_result(
-                                    item["result"]
+                                    item["result"],
+                                    matched_image.getvalue() if matched_image else None
                                 )
 
                             else:
