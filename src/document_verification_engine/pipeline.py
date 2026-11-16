@@ -4,7 +4,7 @@ from document_verification_engine.verification_system_tools.field_extracter impo
 from document_verification_engine.verification_system_tools.verification import verify
 from document_verification_engine.verification_system_tools.create_verification_request import create_verification_request
 
-
+from document_verification_engine.image_extracter_model.improved_ocr_model.pipeline_image_to_txt import extract_text_from_image
 
 
 
@@ -17,13 +17,16 @@ from document_verification_engine.verification_system_tools.create_verification_
 def verify_request(img_path , request ):
 
 
-    text = read_document(img_path)
+    
+    #with open("id_result_only_eng.txt", "r", encoding="utf-8") as file:
+    #    text = file.read()
+    text = extract_text_from_image(img_path)
+
     fields = extract_fields(text , request)
     created_request = create_verification_request(request , fields)
 
-
     result = verify(created_request)
-    return result 
+    return result
 
 
 
