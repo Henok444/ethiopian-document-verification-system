@@ -1,0 +1,29 @@
+﻿file,kind,field,label_score,am_conf,en_conf,am_raw,en_raw,am,en
+line_001.png,junk,,51,34,32,ፖ/ፖርቴ ፈርማ'8ሩረ,TESTE LL Ben,,
+line_002.png,value,,30,10,64,ሞላፍዳናዞሀ፳ተገ*፤,PASSPORT,,PASSPORT
+line_003.png,junk,,0,42,32,""" አዚ;",NE,,
+line_004.png,label,surname,77,70,13,የኢያት ሰም'ፍህጠ(,ACT */Suru,,Suru
+line_005.png,value,,30,44,68,ተሰማ'ገፒ፡5፻እ፤ላ,+07 TESEMA,,07 TESEMA
+line_006.png,label,given_name,100,59,18,ሰም ከነእባት(‹፤ ቦርበ,A” IANR/Given,,Given
+line_007.png,value,,26,32,50,መነን ተማም/እብኣእ! ፐጄእ1ላእ፤,ao} +999°/MENEN TEMAM,,MENEN TEMAM
+line_008.png,value,,54,45,55,. ዜግገነት/ኣ3[(,HT Naty,,HT Naty
+line_009.png,value,,36,3,95,ሯፎዝዘወጋዖዞሯልአ,ETHIOPIAN,,ETHIOPIAN
+line_010.png,value,,51,80,40,- የትውልድ ቀን/004(ር,~freaAL $Y Date,የትውልድ ቀን,
+line_011.png,value,,0,75,96,ረ6 ህህአ 84,26 JUN 84,,26 JUN 84
+line_012.png,label,dob,90,50,38,የተሰጠበት ቀን/ዐ0ፈር 60፤,PHamiie ¢3/Date of,የተሰጠበት ቀን,Date of
+line_013.png,value,,0,79,89,11 ልህር 23,11 AUG 23,,11 AUG 23
+line_014.png,label,issue_date,76,68,17,የሰጠዉ ባለሰልጣን' 15:8,fama MANA Issui,,fama MANA Issui
+line_015.png,value,,41,30,61,ሐ ሀድጅለ ጸሽህሮክ ፻ ዞር)፳ አከተርጩልዝርጋዘ ልኢዐ ከልዝዝርንአሠዚ ሏ ጥጡ ለዩዮል በ 5፡8,ant Dena RTVEN 4 FOR IMMIGRATION AND NATIONAL A Ty AFFA \RS is,,ant Dena RTVEN 4 FOR IMMIGRATION AND NATIONAL A Ty AFFA RS is
+line_016.png,junk,,54,28,14,"1.1, ህጎ: ወዚያዳ አብባ! ሮቦት ቸባ፣ዝ",Ui eoiceamralbiegnaasatic RepulihigsQiy,,
+line_017.png,value,,0,35,96,ሯ]ዘ,ETH,,ETH
+line_018.png,label,name,100,9,71,አጠር,Name,,Name
+line_019.png,label,issue_date,90,45,88,0፤ [589,of Issue,,of Issue
+line_020.png,label,authority,95,27,68,በበ፪ ዲዳህከዕበቨ,ung Authority,,ung Authority
+line_021.png,label,sex,90,0,0,ፆታ/5ርእ,PFiSex,,PFiSex
+line_022.png,junk,,0,26,90,5ዞኮ8273953,EP8273953,,
+line_023.png,junk,,0,0,0,,,,
+line_024.png,label,dob,86,47,25,የትውልድ ቦታሞዘር 6፤ ፪,EHO-AL 02/Place of §,,Place of
+line_025.png,value,,36,11,52,ል85080ፐ,ASOBOT,,ASOBOT
+line_026.png,value,,0,70,53,8፡9 ልህዕ 28 |,409 AUG 28°,,09 AUG 28
+line_027.png,junk,,57,87,16,ህ888 |,uanig |,,
+line_028.png,value,,45,28,53,5፳5፡ሎ፡፡),: of Expiry.,,of Expiry.
